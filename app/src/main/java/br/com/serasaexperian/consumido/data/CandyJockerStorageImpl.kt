@@ -27,6 +27,6 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         const val JOCKER_STORAGE = "JOCKER_STORAGE"
         const val LAUNCH_TIMES = "LAUNCH_TIMES"
         const val GAMER_NAME = "LAUNCH_TIMES"
-        const val DEFAULT_NAME = "Happy gamer"
+        const val DEFAULT_NAME = " gamer"
     }
 }
