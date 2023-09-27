@@ -5,10 +5,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
+import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
 
 
 @Composable
-fun VisualDisplayUnit(){
+fun VisualDisplayUnit(candyJockerViewModel: CandyJockerViewModel){
 
     val navigationConsole = rememberNavController()
 
@@ -19,7 +20,7 @@ fun VisualDisplayUnit(){
         }
 
         composable(route = PanelsRoutes.VisualMenuPanelRoute.direction){
-            VisualMenuPanel(navigationConsole)
+            VisualMenuPanel(navigationConsole, candyJockerViewModel)
         }
 
         composable(route = PanelsRoutes.VisualSettingsPanelRoute.direction){

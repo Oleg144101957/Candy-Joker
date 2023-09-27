@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CandyJoker"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".CandyJockerActivity"
             android:exported="true"
             android:theme="@style/Theme.CandyJoker">
             <intent-filter>

@@ -10,7 +10,7 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         return sharedPreferences.getInt(LAUNCH_TIMES, 0)
     }
 
-    override fun increaseLauncherCounter(times: Int) {
+    override fun increaseLauncherCounter() {
         val lastCounterValue = readTimes()
         sharedPreferences.edit().putInt(LAUNCH_TIMES, lastCounterValue+1).apply()
     }

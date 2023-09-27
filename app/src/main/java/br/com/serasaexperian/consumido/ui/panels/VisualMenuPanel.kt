@@ -1,6 +1,8 @@
 package br.com.serasaexperian.consumido.ui.panels
 
 import android.content.Intent
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.tween
@@ -30,13 +32,18 @@ import androidx.navigation.compose.rememberNavController
 import br.com.serasaexperian.consumido.R
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
 import br.com.serasaexperian.consumido.ui.theme.WhiteJoker
+import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
 import kotlin.system.exitProcess
 
 
 @Composable
-fun VisualMenuPanel(navigationConsole: NavHostController){
+fun VisualMenuPanel(
+    navigationConsole: NavHostController,
+    candyJockerViewModel: CandyJockerViewModel
+){
 
-
+    val context = LocalContext.current
+    val bonuses = candyJockerViewModel.liveBonus.value ?: 0
     val buttonsOffsetY = remember { Animatable(0f) }
 
     LaunchedEffect(Unit){
@@ -65,17 +72,23 @@ fun VisualMenuPanel(navigationConsole: NavHostController){
             contentScale = ContentScale.FillBounds
         )
 
+        Bonuses(bonus = bonuses)
+
         Column(modifier = Modifier
             .align(Alignment.Center)
             .offset(y = buttonsOffsetY.value.dp)
         ){
-
             MenuButton(Buttons.ButtonStart, navigationConsole)
             MenuButton(Buttons.ButtonSettings, navigationConsole)
             MenuButton(Buttons.ButtonExit, navigationConsole)
-
         }
     }
+
+    BackHandler{
+        //do nothing
+        Toast.makeText(context, "Press exit button", Toast.LENGTH_SHORT).show()
+    }
+
 }
 
 @Composable
@@ -118,7 +131,20 @@ fun MenuButton(button: Buttons, navigationConsole: NavHostController){
             modifier = Modifier.align(Alignment.Center)
         )
     }
+}
 
+
+@Composable
+fun BoxScope.Bonuses(bonus: Int){
+    Text(
+        text = "Your bonus: $bonus",
+        fontFamily = PanelsRoutes.candyFont,
+        color = WhiteJoker,
+        modifier = Modifier
+            .padding(8.dp)
+            .align(Alignment.TopStart)
+    )
+    
 }
 
 sealed class Buttons(val buttonText: String){
@@ -126,11 +152,4 @@ sealed class Buttons(val buttonText: String){
     object ButtonSettings : Buttons("Settings")
     object ButtonExit : Buttons("Exit")
 
-}
-
-@Preview
-@Composable
-fun MenuPrev(){
-    val nav = rememberNavController()
-    VisualMenuPanel(navigationConsole = nav)
 }

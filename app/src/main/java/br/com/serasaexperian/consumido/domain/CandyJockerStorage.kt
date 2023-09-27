@@ -5,7 +5,7 @@ interface CandyJockerStorage {
 
     //Launch times
     fun readTimes() : Int
-    fun increaseLauncherCounter(times: Int)
+    fun increaseLauncherCounter()
 
     //User Name
     fun readGamerName() : String
