@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CandyJockerViewModel @Inject constructor(
-    candyJockerStorage: CandyJockerStorage
+    val candyJockerStorage: CandyJockerStorage
 ) : ViewModel() {
 
     private val _liveBonus: MutableLiveData<Int> = MutableLiveData(candyJockerStorage.readTimes())
@@ -63,6 +63,10 @@ class CandyJockerViewModel @Inject constructor(
         if (_status.value == GameStatus.PLAY){
             _status.value = gameStatus
         }
+    }
+
+    fun saveName(name: String){
+        candyJockerStorage.saveGamerName(name)
     }
 
     private fun checkElements() {

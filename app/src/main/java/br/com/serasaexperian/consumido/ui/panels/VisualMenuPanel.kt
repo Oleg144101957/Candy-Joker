@@ -119,6 +119,10 @@ fun MenuButton(button: Buttons, navigationConsole: NavHostController){
                             context.startActivity(intent)
                             exitProcess(0)
                         }
+
+                        is Buttons.ButtonSave -> {
+                            navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
+                        }
                     }
                 }
         )
@@ -151,5 +155,6 @@ sealed class Buttons(val buttonText: String){
     object ButtonStart : Buttons("Start")
     object ButtonSettings : Buttons("Settings")
     object ButtonExit : Buttons("Exit")
+    object ButtonSave : Buttons("Save")
 
 }
