@@ -28,7 +28,7 @@ fun VisualDisplayUnit(candyJockerViewModel: CandyJockerViewModel){
         }
 
         composable(route = PanelsRoutes.VisualPlaygroundPanelRoute.direction){
-            VisualPlaygroundPanel(navigationConsole)
+            VisualPlaygroundPanel(navigationConsole, candyJockerViewModel)
         }
     }
 }
