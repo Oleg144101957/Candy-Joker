@@ -26,7 +26,7 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
     companion object{
         const val JOCKER_STORAGE = "JOCKER_STORAGE"
         const val LAUNCH_TIMES = "LAUNCH_TIMES"
-        const val GAMER_NAME = "LAUNCH_TIMES"
+        const val GAMER_NAME = "GAMER_NAME"
         const val DEFAULT_NAME = " gamer"
     }
 }

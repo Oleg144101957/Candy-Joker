@@ -128,7 +128,7 @@ fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewM
         when(gameStatus.value){
             GameStatus.SCORES0 -> { GameOverScreen(msg = "A lot of bombs and fire", navigationConsole = navigationConsole) }
             GameStatus.TIMEISGONE -> { GameOverScreen(msg = "No time, sorry!", navigationConsole = navigationConsole) }
-            GameStatus.WINNER -> { YouWinScreen(msg = "You have 6 scores", navigationConsole = navigationConsole) }
+            GameStatus.WINNER -> { YouWinScreen(msg = "You have took all elements", navigationConsole = navigationConsole) }
             else -> {  }
         }
     }

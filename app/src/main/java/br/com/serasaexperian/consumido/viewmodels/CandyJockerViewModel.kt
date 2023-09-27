@@ -73,7 +73,7 @@ class CandyJockerViewModel @Inject constructor(
         viewModelScope.launch {
             delay(300)
             val isAllInvisible = _liveElements.value?.all { !it.isVisible } ?: false
-            if (isAllInvisible){
+            if (isAllInvisible || _scores.value == 6){
                 val newVisibleList = _liveElements.value?.map { it.copy(isVisible = true) }
                 _liveElements.value = null
                 delay(1000)
