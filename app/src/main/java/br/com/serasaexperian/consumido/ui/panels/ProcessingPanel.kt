@@ -12,15 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -31,27 +28,27 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun ProcessingPanel(navigationConsole: NavHostController){
+fun ProcessingPanel(navigationConsole: NavHostController) {
     val percents = remember { mutableIntStateOf(0) }
     val configuration = LocalConfiguration.current
     val screenHeight = (configuration.screenHeightDp * 2).toFloat()
 
-    val animRadius = remember{ Animatable(screenHeight) }
+    val animRadius = remember { Animatable(screenHeight) }
 
 
-    LaunchedEffect("percents"){
+    LaunchedEffect("percents") {
         delay(1000)
-        while (percents.value < 100){
+        while (percents.value < 100) {
             delay(5)
-            percents.value = percents.value+1
+            percents.value = percents.value + 1
 
-            if (percents.value == 100){
+            if (percents.value == 100) {
                 navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
             }
         }
     }
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         animRadius.animateTo(
             targetValue = 0f,
             animationSpec = tween(
@@ -68,7 +65,7 @@ fun ProcessingPanel(navigationConsole: NavHostController){
         contentScale = ContentScale.FillBounds
     )
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxSize()) {
 
         Image(
             painter = painterResource(id = R.drawable.startbackgroundforthetext),

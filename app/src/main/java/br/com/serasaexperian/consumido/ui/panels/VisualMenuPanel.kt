@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,11 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import br.com.serasaexperian.consumido.R
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
 import br.com.serasaexperian.consumido.ui.theme.WhiteJoker
@@ -40,18 +37,20 @@ import kotlin.system.exitProcess
 fun VisualMenuPanel(
     navigationConsole: NavHostController,
     candyJockerViewModel: CandyJockerViewModel
-){
+) {
 
     val context = LocalContext.current
     val bonuses = candyJockerViewModel.liveBonus.value ?: 0
     val buttonsOffsetY = remember { Animatable(0f) }
 
-    LaunchedEffect(Unit){
-        buttonsOffsetY.animateTo(targetValue = 128f, tween(
-            durationMillis = 300,
-            delayMillis = 500,
-            easing = FastOutLinearInEasing
-        ))
+    LaunchedEffect(Unit) {
+        buttonsOffsetY.animateTo(
+            targetValue = 128f, tween(
+                durationMillis = 300,
+                delayMillis = 500,
+                easing = FastOutLinearInEasing
+            )
+        )
     }
 
     Image(
@@ -61,7 +60,7 @@ fun VisualMenuPanel(
         contentScale = ContentScale.FillBounds
     )
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxSize()) {
 
         Image(
             painter = painterResource(id = R.drawable.decorgirl),
@@ -74,17 +73,18 @@ fun VisualMenuPanel(
 
         Bonuses(bonus = bonuses)
 
-        Column(modifier = Modifier
-            .align(Alignment.Center)
-            .offset(y = buttonsOffsetY.value.dp)
-        ){
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .offset(y = buttonsOffsetY.value.dp)
+        ) {
             MenuButton(Buttons.ButtonStart, navigationConsole)
             MenuButton(Buttons.ButtonSettings, navigationConsole)
             MenuButton(Buttons.ButtonExit, navigationConsole)
         }
     }
 
-    BackHandler{
+    BackHandler {
         //do nothing
         Toast.makeText(context, "Press exit button", Toast.LENGTH_SHORT).show()
     }
@@ -92,11 +92,11 @@ fun VisualMenuPanel(
 }
 
 @Composable
-fun MenuButton(button: Buttons, navigationConsole: NavHostController){
+fun MenuButton(button: Buttons, navigationConsole: NavHostController) {
 
     val context = LocalContext.current
 
-    Box(modifier = Modifier.padding(8.dp)){
+    Box(modifier = Modifier.padding(8.dp)) {
         Image(
             painter = painterResource(id = R.drawable.scoresandbuttonbackground),
             contentDescription = "button ${button.buttonText}",
@@ -139,7 +139,7 @@ fun MenuButton(button: Buttons, navigationConsole: NavHostController){
 
 
 @Composable
-fun BoxScope.Bonuses(bonus: Int){
+fun BoxScope.Bonuses(bonus: Int) {
     Text(
         text = "Your bonus: $bonus",
         fontFamily = PanelsRoutes.candyFont,
@@ -148,10 +148,10 @@ fun BoxScope.Bonuses(bonus: Int){
             .padding(8.dp)
             .align(Alignment.TopStart)
     )
-    
+
 }
 
-sealed class Buttons(val buttonText: String){
+sealed class Buttons(val buttonText: String) {
     object ButtonStart : Buttons("Start")
     object ButtonSettings : Buttons("Settings")
     object ButtonExit : Buttons("Exit")

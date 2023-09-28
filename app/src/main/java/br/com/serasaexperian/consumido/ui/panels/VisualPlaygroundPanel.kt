@@ -22,14 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -47,9 +44,12 @@ import kotlin.random.Random
 
 
 @Composable
-fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewModel: CandyJockerViewModel){
+fun VisualPlaygroundPanel(
+    navigationConsole: NavHostController,
+    candyJockerViewModel: CandyJockerViewModel
+) {
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         candyJockerViewModel.initListOfElements()
     }
 
@@ -62,14 +62,14 @@ fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewM
 
     val gameStatus = candyJockerViewModel.status.observeAsState()
 
-    LaunchedEffect(Unit){
-        repeat(20){
+    LaunchedEffect(Unit) {
+        repeat(20) {
             delay(1000)
-            gameTime.intValue = gameTime.intValue-1
+            gameTime.intValue = gameTime.intValue - 1
         }
     }
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         delay(2000)
         isVisibleRuresScreen.value = false
     }
@@ -83,7 +83,7 @@ fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewM
     )
 
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxSize()) {
 
         Icon(
             imageVector = Icons.Default.Close,
@@ -108,40 +108,55 @@ fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewM
             AnimateElements(it, candyJockerViewModel)
         }
 
-        if (isVisibleRuresScreen.value){
+        if (isVisibleRuresScreen.value) {
             RulesScreen()
         }
 
-        if (gameScores.value!! < 0){
+        if (gameScores.value!! < 0) {
             candyJockerViewModel.postStatus(GameStatus.SCORES0)
-        } else if (gameTime.value!! <= 0){
+        } else if (gameTime.value!! <= 0) {
             candyJockerViewModel.postStatus(GameStatus.TIMEISGONE)
-        } else if (gameScores.value == 10){
+        } else if (gameScores.value == 10) {
             candyJockerViewModel.postStatus(GameStatus.WINNER)
         }
 
-        when(gameStatus.value){
-            GameStatus.SCORES0 -> { GameOverScreen(msg = "A lot of bombs and fire", navigationConsole = navigationConsole) }
-            GameStatus.TIMEISGONE -> { GameOverScreen(msg = "No time, sorry!", navigationConsole = navigationConsole) }
-            GameStatus.WINNER -> { YouWinScreen(msg = "You have took all elements", navigationConsole = navigationConsole) }
-            else -> {  }
+        when (gameStatus.value) {
+            GameStatus.SCORES0 -> {
+                GameOverScreen(
+                    msg = "A lot of bombs and fire",
+                    navigationConsole = navigationConsole
+                )
+            }
+
+            GameStatus.TIMEISGONE -> {
+                GameOverScreen(msg = "No time, sorry!", navigationConsole = navigationConsole)
+            }
+
+            GameStatus.WINNER -> {
+                YouWinScreen(
+                    msg = "You have took all elements",
+                    navigationConsole = navigationConsole
+                )
+            }
+
+            else -> {}
         }
     }
 }
 
 
-
-
 @Composable
-fun RulesScreen(){
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(BlackJoker.copy(alpha = 0.7f))
-    ){
+fun RulesScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BlackJoker.copy(alpha = 0.7f))
+    ) {
 
-        Column(modifier = Modifier
-            .align(Alignment.Center)
-        ){
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+        ) {
 
             Text(
                 text = "Be careful!",
@@ -161,11 +176,12 @@ fun RulesScreen(){
 
 
 @Composable
-fun GameOverScreen(msg: String, navigationConsole: NavHostController){
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(BlackJoker)
-    ){
+fun GameOverScreen(msg: String, navigationConsole: NavHostController) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BlackJoker)
+    ) {
 
         Icon(
             imageVector = Icons.Default.Close,
@@ -179,9 +195,10 @@ fun GameOverScreen(msg: String, navigationConsole: NavHostController){
                 }
         )
 
-        Column(modifier = Modifier
-            .align(Alignment.Center)
-        ){
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+        ) {
 
             Text(
                 text = "Game Over!",
@@ -201,11 +218,12 @@ fun GameOverScreen(msg: String, navigationConsole: NavHostController){
 
 
 @Composable
-fun YouWinScreen(msg: String, navigationConsole: NavHostController){
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(BlackJoker)
-    ){
+fun YouWinScreen(msg: String, navigationConsole: NavHostController) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BlackJoker)
+    ) {
 
         Icon(
             imageVector = Icons.Default.Close,
@@ -219,9 +237,10 @@ fun YouWinScreen(msg: String, navigationConsole: NavHostController){
                 }
         )
 
-        Column(modifier = Modifier
-            .align(Alignment.Center)
-        ){
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+        ) {
 
             Text(
                 text = "You Win!",
@@ -240,14 +259,14 @@ fun YouWinScreen(msg: String, navigationConsole: NavHostController){
 }
 
 
-
 @Composable
-fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: String){
-    Box(modifier = Modifier
-        .align(Alignment.TopStart)
-        .padding(8.dp)
+fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: String) {
+    Box(
+        modifier = Modifier
+            .align(Alignment.TopStart)
+            .padding(8.dp)
 
-    ){
+    ) {
         Image(
             painter = painterResource(id = R.drawable.playscenebackground),
             contentDescription = "details background",
@@ -256,8 +275,9 @@ fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: Str
                 .fillMaxWidth(0.4f)
         )
 
-        Column(modifier = Modifier
-            .align(Alignment.Center)
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
         ) {
 
             Text(
@@ -292,7 +312,7 @@ fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: Str
 }
 
 @Composable
-fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerViewModel){
+fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerViewModel) {
 
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp / 2f - 100f
@@ -306,31 +326,35 @@ fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerView
         Animatable(0f)
     }
 
-    fun getRandomOffsetY() : Float {
+    fun getRandomOffsetY(): Float {
         return Random.nextFloat() * screenHeightDp
     }
 
-    fun getRandomOffsetX() : Float {
-        return (Random.nextFloat() * screenWidthDp * 2)-screenWidthDp
+    fun getRandomOffsetX(): Float {
+        return (Random.nextFloat() * screenWidthDp * 2) - screenWidthDp
     }
 
-    LaunchedEffect(Unit){
-        offsetX.animateTo(targetValue = getRandomOffsetX(), tween(
-            durationMillis = 700,
-            delayMillis = 300,
-            easing = FastOutLinearInEasing
-        ))
+    LaunchedEffect(Unit) {
+        offsetX.animateTo(
+            targetValue = getRandomOffsetX(), tween(
+                durationMillis = 700,
+                delayMillis = 300,
+                easing = FastOutLinearInEasing
+            )
+        )
     }
 
-    LaunchedEffect(Unit){
-        offsetY.animateTo(targetValue = getRandomOffsetY(), tween(
-            durationMillis = 700,
-            delayMillis = 300,
-            easing = FastOutLinearInEasing
-        ))
+    LaunchedEffect(Unit) {
+        offsetY.animateTo(
+            targetValue = getRandomOffsetY(), tween(
+                durationMillis = 700,
+                delayMillis = 300,
+                easing = FastOutLinearInEasing
+            )
+        )
     }
 
-    if (candy.isVisible){
+    if (candy.isVisible) {
         Image(
             painter = painterResource(id = candy.image),
             contentDescription = "element",
