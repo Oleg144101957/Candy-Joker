@@ -104,6 +104,7 @@ class CandyJockerViewModel @Inject constructor(
     fun initListOfElements(){
         _scores.value = 0
         _status.value = GameStatus.PLAY
+        _userName.value = candyJockerStorage.readGamerName()
         _liveElements.value = _liveElements.value?.map { it.copy(isVisible = true) }
     }
 }

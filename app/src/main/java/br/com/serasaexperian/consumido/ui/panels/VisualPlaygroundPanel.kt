@@ -49,11 +49,9 @@ import kotlin.random.Random
 @Composable
 fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewModel: CandyJockerViewModel){
 
-
     LaunchedEffect(Unit){
         candyJockerViewModel.initListOfElements()
     }
-
 
     val gameList = candyJockerViewModel.liveElements.observeAsState()
     val gameScores = candyJockerViewModel.scores.observeAsState()
@@ -71,13 +69,10 @@ fun VisualPlaygroundPanel(navigationConsole: NavHostController, candyJockerViewM
         }
     }
 
-
     LaunchedEffect(Unit){
         delay(2000)
         isVisibleRuresScreen.value = false
     }
-
-
 
     //Playground
     Image(
@@ -265,7 +260,6 @@ fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: Str
             .align(Alignment.Center)
         ) {
 
-
             Text(
                 text = "Hello $name",
                 color = WhiteJoker,
@@ -312,7 +306,6 @@ fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerView
         Animatable(0f)
     }
 
-
     fun getRandomOffsetY() : Float {
         return Random.nextFloat() * screenHeightDp
     }
@@ -343,6 +336,7 @@ fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerView
             contentDescription = "element",
             modifier = Modifier
                 .align(Alignment.BottomCenter)
+                .size(48.dp)
                 .offset(x = offsetX.value.dp, y = offsetY.value.dp)
                 .clickable {
                     candyJockerViewModel.onClickButton(candy.id)
