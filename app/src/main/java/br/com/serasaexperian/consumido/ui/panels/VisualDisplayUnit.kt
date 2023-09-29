@@ -16,7 +16,7 @@ fun VisualDisplayUnit(candyJockerViewModel: CandyJockerViewModel){
     NavHost(navController = navigationConsole, startDestination = PanelsRoutes.ProcessingPanelRoute.direction){
 
         composable(route = PanelsRoutes.ProcessingPanelRoute.direction){
-            ProcessingPanel(navigationConsole)
+            ProcessingPanel(navigationConsole, candyJockerViewModel)
         }
 
         composable(route = PanelsRoutes.VisualMenuPanelRoute.direction){

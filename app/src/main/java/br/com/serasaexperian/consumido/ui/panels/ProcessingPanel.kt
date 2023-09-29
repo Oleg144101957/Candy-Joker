@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,24 +23,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.com.serasaexperian.consumido.R
+import br.com.serasaexperian.consumido.domain.GeneralDataManager
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
 import br.com.serasaexperian.consumido.ui.theme.WhiteJoker
+import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
 import kotlinx.coroutines.delay
 
 
 @Composable
-fun ProcessingPanel(navigationConsole: NavHostController) {
+fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: CandyJockerViewModel) {
     val percents = remember { mutableIntStateOf(0) }
     val configuration = LocalConfiguration.current
     val screenHeight = (configuration.screenHeightDp * 2).toFloat()
+    val gameElements = candyJockerViewModel.liveElements.observeAsState()
+
+
+    if (gameElements.value?.get(6)?.description == GeneralDataManager.ON){
+        navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
+    }
 
     val animRadius = remember { Animatable(screenHeight) }
-
 
     LaunchedEffect("percents") {
         delay(1000)
         while (percents.value < 100) {
-            delay(5)
+            delay(80)
             percents.value = percents.value + 1
 
             if (percents.value == 100) {

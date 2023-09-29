@@ -2,9 +2,11 @@ package br.com.serasaexperian.consumido.di
 
 import android.content.Context
 import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
+import br.com.serasaexperian.consumido.data.ConnectionCheckerImpl
 import br.com.serasaexperian.consumido.data.RProviderImpl
 import br.com.serasaexperian.consumido.domain.AppVersionSaver
 import br.com.serasaexperian.consumido.domain.CandyJockerStorage
+import br.com.serasaexperian.consumido.domain.ConnectionChecker
 import br.com.serasaexperian.consumido.domain.GeneralDataManager
 import br.com.serasaexperian.consumido.domain.RProvider
 import br.com.serasaexperian.consumido.domain.TimesIncreaser
@@ -54,4 +56,11 @@ class DataModule {
     fun provideCandyJockerStorage(@ApplicationContext context: Context) : CandyJockerStorage {
         return CandyJockerStorageImpl(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideConnectionChecker() : ConnectionChecker {
+        return ConnectionCheckerImpl()
+    }
+
 }

@@ -33,7 +33,8 @@
 
         <activity
             android:name=".NoConnectionActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
     </application>
 

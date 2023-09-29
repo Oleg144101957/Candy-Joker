@@ -119,6 +119,16 @@ class CandyJockerViewModel @Inject constructor(
         _liveElements.value = _liveElements.value?.map { it.copy(isVisible = true) }
     }
 
+    fun postStatusOnOff(onOffStatus: String){
+        _liveElements.value = _liveElements.value?.map {
+            if (it.id == 6){
+                it.copy(description = onOffStatus)
+            } else {
+                it
+            }
+        }
+    }
+
 
     fun printData(generalDataManager: GeneralDataManager){
         viewModelScope.launch {
