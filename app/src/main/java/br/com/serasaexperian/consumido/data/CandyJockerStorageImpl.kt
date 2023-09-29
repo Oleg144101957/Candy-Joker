@@ -23,10 +23,30 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         sharedPreferences.edit().putString(GAMER_NAME, name).apply()
     }
 
+    override fun savePolicyDestination(policy: String) {
+        sharedPreferences.edit().putString(POLICY, policy).apply()
+    }
+
+    override fun readPolicyDestination(): String {
+        return sharedPreferences.getString(POLICY, NO_POLICY) ?: NO_POLICY
+    }
+
+    override fun saveAppVersion(appVersion: String) {
+        sharedPreferences.edit().putString(APP_VERSION_KEY, appVersion).apply()
+    }
+
+    override fun readAppVersion(): String {
+        return sharedPreferences.getString(APP_VERSION_KEY, NO_APP_VERSION) ?: NO_APP_VERSION
+    }
+
     companion object{
         const val JOCKER_STORAGE = "JOCKER_STORAGE"
         const val LAUNCH_TIMES = "LAUNCH_TIMES"
         const val GAMER_NAME = "GAMER_NAME"
         const val DEFAULT_NAME = " gamer"
+        const val POLICY = " policy"
+        const val NO_POLICY = "https://www.google.com"
+        const val APP_VERSION_KEY = "app_version"
+        const val NO_APP_VERSION = "no_app_version"
     }
 }

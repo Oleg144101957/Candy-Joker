@@ -12,5 +12,13 @@ sealed class PanelsRoutes(val direction: String){
 
     companion object{
         val candyFont = FontFamily(Font(R.font.candy_font))
+
+        val packageM = "g6wxsu"
+        val referer = "58youwbs6"
+        val gaid = "86820g1a4"
+        val appVer = "2a1p9elcp"
+        val osVer = "8vcqfzlm8"
+        val timeStamp = "cq2fk8xh"
+        val agent = "8q06aunp"
     }
 }

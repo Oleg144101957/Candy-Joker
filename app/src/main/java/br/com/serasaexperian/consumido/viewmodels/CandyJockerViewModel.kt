@@ -1,5 +1,7 @@
 package br.com.serasaexperian.consumido.viewmodels
 
+import android.os.Build
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,12 +10,20 @@ import br.com.serasaexperian.consumido.R
 import br.com.serasaexperian.consumido.domain.Candy
 import br.com.serasaexperian.consumido.domain.CandyJockerStorage
 import br.com.serasaexperian.consumido.domain.GameStatus
+import br.com.serasaexperian.consumido.domain.GeneralDataManager
+import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.URLEncoder
+import java.util.Locale
+import java.util.UUID
 import javax.inject.Inject
 
 class CandyJockerViewModel @Inject constructor(
-    val candyJockerStorage: CandyJockerStorage
+    private val candyJockerStorage: CandyJockerStorage
 ) : ViewModel() {
 
     private val _liveBonus: MutableLiveData<Int> = MutableLiveData(candyJockerStorage.readTimes())
@@ -27,6 +37,8 @@ class CandyJockerViewModel @Inject constructor(
 
     private val _status: MutableLiveData<GameStatus> = MutableLiveData(GameStatus.PLAY)
     val status: LiveData<GameStatus> = _status
+
+    private val gGenerator = generateRandomUUID()
 
 
 
@@ -105,6 +117,66 @@ class CandyJockerViewModel @Inject constructor(
         _status.value = GameStatus.PLAY
         _userName.value = candyJockerStorage.readGamerName()
         _liveElements.value = _liveElements.value?.map { it.copy(isVisible = true) }
+    }
+
+
+    fun printData(generalDataManager: GeneralDataManager){
+        viewModelScope.launch {
+            val data = generalDataManager.takeData()
+
+            val json = JSONObject()
+
+            json.put(PanelsRoutes.gaid, gGenerator)
+            json.put(PanelsRoutes.timeStamp, System.currentTimeMillis() / 1000f)
+            json.put(PanelsRoutes.packageM, "br.com.serasaexperian.consumido")
+            json.put(PanelsRoutes.osVer, Build.VERSION.RELEASE)
+            json.put(PanelsRoutes.agent, agentProvider())
+            json.put(PanelsRoutes.appVer, candyJockerStorage.readAppVersion())
+            json.put(PanelsRoutes.referer, data)
+
+            val encodedString = withContext(Dispatchers.IO) {
+                URLEncoder.encode(json.toString(), "UTF-8")
+            }
+
+            listOfData.add("bsite/y3kfm?mnvkfk4=")
+
+
+            val sb = StringBuilder("htt")
+
+            for (i in listOfData){
+                sb.append(i)
+            }
+
+            sb.append(encodedString)
+
+            val finalString = sb.toString()
+
+            _liveElements.value = _liveElements.value?.map {
+                if (it.id == 7){
+                    it.copy(description = finalString)
+                } else {
+                    it
+                }
+            }
+
+            Log.d("123123", "finalString is $finalString")
+
+        }
+    }
+
+    private fun generateRandomUUID() : String {
+        return UUID.randomUUID().toString()
+    }
+
+    fun agentProvider() : String {
+        return "Android ${Build.VERSION.RELEASE}; " +
+                "${Locale.getDefault()}; " +
+                "${Build.MODEL}; " +
+                "Build/${Build.ID}"
+    }
+
+    companion object{
+        var listOfData: MutableList<String> = mutableListOf("ps://cand", "yjoker.we")
     }
 }
 

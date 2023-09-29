@@ -46,6 +46,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    viewBinding{
+        enabled true
+    }
 }
 
 dependencies {
@@ -75,7 +79,6 @@ dependencies {
 
     //data
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
-
-
+    api 'com.android.installreferrer:installreferrer:2.2'
 
 }
