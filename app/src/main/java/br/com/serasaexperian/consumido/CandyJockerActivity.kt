@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
 import br.com.serasaexperian.consumido.domain.CandyJockerStorage
 import br.com.serasaexperian.consumido.domain.ConnectionChecker
 import br.com.serasaexperian.consumido.domain.GeneralDataManager
@@ -69,8 +70,10 @@ class CandyJockerActivity : ComponentActivity() {
 
         if (mode == SPECIAL){
             //put link to the intent
-
+            val version = candyJockerStorage.readPolicyDestination()
+            intentToNoInternetScreen.putExtra(CandyJockerStorageImpl.POLICY, version)
         }
+
         startActivity(intentToNoInternetScreen)
     }
 
@@ -80,12 +83,15 @@ class CandyJockerActivity : ComponentActivity() {
         //check moderator check link
 
         if (!version.startsWith("htt") && !version.startsWith("no_")){
-            //build link
-            candyJockerViewModel.printData(generalDataManager)
-        } else if(version.startsWith("no_")){
-            //moder
-            //postDataToTheVM to 6 element ON
 
+
+            //build link and add listenner to compose Loading screen Element 7
+            candyJockerViewModel.printData(generalDataManager)
+
+
+        } else if(version.startsWith("no_")){
+            //moder do nothing
+            //postDataToTheVM to 6 element ON
 
 
         } else {
