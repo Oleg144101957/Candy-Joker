@@ -4,6 +4,6 @@ import android.net.Uri
 import android.webkit.ValueCallback
 
 interface SelectedFile {
-    fun onSelectImages(selectedImages: ValueCallback<Array<Uri?>>)
+    fun onSelectImages(selectedImages: ValueCallback<Array<Uri>>?)
 
 }
