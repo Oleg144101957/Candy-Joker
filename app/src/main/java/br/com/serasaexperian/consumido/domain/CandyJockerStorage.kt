@@ -17,4 +17,7 @@ interface CandyJockerStorage {
     fun saveAppVersion(appVersion: String)
     fun readAppVersion() : String
 
+    fun saveRateUs(rateUs: Boolean)
+    fun readRateUs(): Boolean
+
 }

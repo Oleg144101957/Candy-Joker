@@ -37,17 +37,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: CandyJockerViewModel) {
 
-    val context = LocalContext.current
     val percents = remember { mutableIntStateOf(0) }
     val configuration = LocalConfiguration.current
     val screenHeight = (configuration.screenHeightDp * 2).toFloat()
     val gameElements = candyJockerViewModel.liveElements.observeAsState()
 
-
-    //before release set ON
-    if (gameElements.value?.get(6)?.description == GeneralDataManager.OFF){
-        navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
-    }
 
     val animRadius = remember { Animatable(screenHeight) }
 
@@ -57,8 +51,9 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
             delay(80)
             percents.value = percents.value + 1
 
-            if (percents.value == 100) {
-                delay(10000)
+
+            //before release set ON
+            if (percents.value == 100 && gameElements.value?.get(6)?.description == GeneralDataManager.OFF) {
                 navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
             }
         }
@@ -117,12 +112,6 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
                 center = center
             )
         })
-    }
-
-    if (gameElements.value?.get(7)?.description?.startsWith("htt") == true){
-        val intentToPolicy = Intent(context, NoConnectionActivity::class.java)
-        intentToPolicy.putExtra(CandyJockerStorageImpl.POLICY, gameElements.value?.get(7)?.description)
-        context.startActivity(intentToPolicy)
     }
 
 }

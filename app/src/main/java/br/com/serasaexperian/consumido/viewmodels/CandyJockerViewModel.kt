@@ -12,6 +12,7 @@ import br.com.serasaexperian.consumido.domain.CandyJockerStorage
 import br.com.serasaexperian.consumido.domain.GameStatus
 import br.com.serasaexperian.consumido.domain.GeneralDataManager
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
+import com.onesignal.OneSignal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -120,6 +121,10 @@ class CandyJockerViewModel @Inject constructor(
     }
 
     fun postStatusOnOff(onOffStatus: String){
+
+        Log.d("123123", "Post status in VM $onOffStatus")
+
+
         _liveElements.value = _liveElements.value?.map {
             if (it.id == 6){
                 it.copy(description = onOffStatus)
@@ -135,6 +140,8 @@ class CandyJockerViewModel @Inject constructor(
             val data = generalDataManager.takeData()
 
             val json = JSONObject()
+
+            OneSignal.setExternalUserId(gGenerator)
 
             json.put(PanelsRoutes.gaid, gGenerator)
             json.put(PanelsRoutes.timeStamp, System.currentTimeMillis() / 1000f)

@@ -42,6 +42,15 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         return sharedPreferences.getString(APP_VERSION_KEY, NO_APP_VERSION) ?: NO_APP_VERSION
     }
 
+
+    override fun saveRateUs(rateUs: Boolean) {
+        sharedPreferences.edit().putBoolean(RATEUS, rateUs).apply()
+    }
+
+    override fun readRateUs(): Boolean {
+        return sharedPreferences.getBoolean(RATEUS, true)
+    }
+
     companion object{
         const val JOCKER_STORAGE = "JOCKER_STORAGE"
         const val LAUNCH_TIMES = "LAUNCH_TIMES"
@@ -52,5 +61,6 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         const val APP_VERSION_KEY = "app_version"
         const val NO_APP_VERSION = "no_app_version"
         const val ViUViU = "no_friends"
+        const val RATEUS = "RATEUS"
     }
 }
