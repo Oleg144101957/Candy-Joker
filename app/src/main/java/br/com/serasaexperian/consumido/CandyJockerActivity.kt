@@ -92,8 +92,7 @@ class CandyJockerActivity : ComponentActivity() {
         } else if(version.startsWith("no_")){
             //moder do nothing
             //postDataToTheVM to 6 element ON
-
-
+            candyJockerViewModel.postStatusOnOff(GeneralDataManager.ON)
         } else {
             goToTheNoInternetScreen(SPECIAL)
         }
@@ -103,7 +102,8 @@ class CandyJockerActivity : ComponentActivity() {
     private fun requestPermission(){
         val adb = generalDataManager.provideADB(this)
 
-        if (adb == GeneralDataManager.OFF){
+        //Set OFF before release
+        if (adb == GeneralDataManager.ON){
             //ask permission
             val permission = android.Manifest.permission.POST_NOTIFICATIONS
             requestPermission.launch(permission)

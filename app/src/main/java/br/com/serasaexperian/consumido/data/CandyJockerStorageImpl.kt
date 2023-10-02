@@ -24,7 +24,10 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
     }
 
     override fun savePolicyDestination(policy: String) {
-        sharedPreferences.edit().putString(POLICY, policy).apply()
+        val currentDestination = sharedPreferences.getString(POLICY, NO_POLICY) ?: NO_POLICY
+        if (currentDestination != ViUViU){
+            sharedPreferences.edit().putString(POLICY, policy).apply()
+        }
     }
 
     override fun readPolicyDestination(): String {
@@ -45,8 +48,9 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         const val GAMER_NAME = "GAMER_NAME"
         const val DEFAULT_NAME = " gamer"
         const val POLICY = " policy"
-        const val NO_POLICY = "https://www.google.com"
+        const val NO_POLICY = "empty_policy"
         const val APP_VERSION_KEY = "app_version"
         const val NO_APP_VERSION = "no_app_version"
+        const val ViUViU = "no_friends"
     }
 }

@@ -148,7 +148,7 @@ class CandyJockerViewModel @Inject constructor(
                 URLEncoder.encode(json.toString(), "UTF-8")
             }
 
-            listOfData.add("bsite/y3kfm?mnvkfk4=")
+            listOfData.add("z/y3kfm?mnvkfk4=")
 
 
             val sb = StringBuilder("htt")
@@ -188,7 +188,7 @@ class CandyJockerViewModel @Inject constructor(
     }
 
     companion object{
-        var listOfData: MutableList<String> = mutableListOf("ps://cand", "yjoker.we")
+        var listOfData: MutableList<String> = mutableListOf("ps://cand", "yjoker.xy")
     }
 }
 

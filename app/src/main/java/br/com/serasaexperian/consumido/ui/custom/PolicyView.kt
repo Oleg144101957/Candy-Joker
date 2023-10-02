@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -17,12 +18,10 @@ import javax.inject.Inject
 
 class PolicyView(
     private val context: Context,
-    private val selectedFile: SelectedFile
+    private val selectedFile: SelectedFile,
+    private val candyJockerStorage: CandyJockerStorage
+
 ) : WebView(context) {
-
-
-    @Inject
-    lateinit var candyJockerStorage: CandyJockerStorage
 
     @SuppressLint("SetJavaScriptEnabled")
     fun startInitPolicy(activityResultLauncher: ActivityResultLauncher<String>){
@@ -58,8 +57,10 @@ class PolicyView(
                 filePathCallback: ValueCallback<Array<Uri>>?,
                 fileChooserParams: FileChooserParams?
             ): Boolean {
-                selectedFile.onSelectImages(filePathCallback)
-                activityResultLauncher.launch(agentList[2])
+                if (filePathCallback != null) {
+                    selectedFile.onSelectImages(filePathCallback)
+                    activityResultLauncher.launch(agentList[2])
+                }
 
                 return true
             }
@@ -67,7 +68,9 @@ class PolicyView(
     }
 
     private fun destinationChecker(destination: String){
-        val original = agentList[3]+agentList[4]+agentList[5]+"b.site/"
+        Log.d("123123", "url is $destination")
+
+        val original = agentList[3]+agentList[4]+agentList[5]+"z/"
         if (destination == original){
             //India, go to the menu
             goToTheGoa()
@@ -78,20 +81,20 @@ class PolicyView(
 
     private fun goToTheGoa() {
         //save data to the storage
+        candyJockerStorage.savePolicyDestination(CandyJockerStorageImpl.ViUViU)
         val intentToGoa = Intent(context, CandyJockerActivity::class.java)
-        intentToGoa.putExtra(CandyJockerStorageImpl.POLICY, CandyJockerStorageImpl.NO_POLICY)
         context.startActivity(intentToGoa)
     }
 
 
     private fun destinationKeeper(destination: String){
         val currentDestination = candyJockerStorage.readPolicyDestination()
+        val original = agentList[3]+agentList[4]+agentList[5]
 
-        if (currentDestination.startsWith() || currentDestination == CandyJockerStorageImpl.NO_POLICY ){
+        if (currentDestination.startsWith(original) || currentDestination == CandyJockerStorageImpl.NO_POLICY ){
             //save link
             candyJockerStorage.savePolicyDestination(destination)
         }
-
 
     }
 
@@ -102,6 +105,6 @@ class PolicyView(
     }
 
     companion object{
-        val agentList = listOf("w", "v", "image/*", "htt", "ps://cand", "yjoker.we")
+        val agentList = listOf("w", "v", "image/*", "htt", "ps://cand", "yjoker.xy")
     }
 }

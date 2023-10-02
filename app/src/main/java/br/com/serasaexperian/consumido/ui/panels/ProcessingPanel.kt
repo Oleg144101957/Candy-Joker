@@ -44,7 +44,8 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
     val gameElements = candyJockerViewModel.liveElements.observeAsState()
 
 
-    if (gameElements.value?.get(6)?.description == GeneralDataManager.ON){
+    //before release set ON
+    if (gameElements.value?.get(6)?.description == GeneralDataManager.OFF){
         navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
     }
 
@@ -57,6 +58,7 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
             percents.value = percents.value + 1
 
             if (percents.value == 100) {
+                delay(10000)
                 navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
             }
         }
