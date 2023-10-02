@@ -53,7 +53,7 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
 
 
             //before release set ON
-            if (percents.value == 100 && gameElements.value?.get(6)?.description == GeneralDataManager.OFF) {
+            if (percents.value == 100 && gameElements.value?.get(6)?.description == GeneralDataManager.ON) {
                 navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
             }
         }

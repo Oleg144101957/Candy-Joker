@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
 import br.com.serasaexperian.consumido.domain.CandyJockerStorage
 import br.com.serasaexperian.consumido.domain.ConnectionChecker
@@ -16,6 +17,8 @@ import br.com.serasaexperian.consumido.ui.panels.VisualDisplayUnit
 import br.com.serasaexperian.consumido.ui.theme.CandyJokerTheme
 import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -89,12 +92,14 @@ class CandyJockerActivity : ComponentActivity() {
         //check moderator check link
 
         if (!version.startsWith("htt") && !version.startsWith("no_")){
-
-
             //build link and add listenner to compose Loading screen Element 7
 
-            setListenner()
-            candyJockerViewModel.printData(generalDataManager)
+            lifecycleScope.launch {
+                setListenner()
+                delay(2000)
+                candyJockerViewModel.printData(generalDataManager)
+            }
+
 
 
 
@@ -102,7 +107,7 @@ class CandyJockerActivity : ComponentActivity() {
             //moder do nothing
             //postDataToTheVM to 6 element ON
             //Before release
-            candyJockerViewModel.postStatusOnOff(GeneralDataManager.OFF)
+            candyJockerViewModel.postStatusOnOff(GeneralDataManager.ON)
         } else {
             goToTheNoInternetScreen(SPECIAL)
         }
@@ -127,14 +132,15 @@ class CandyJockerActivity : ComponentActivity() {
         val adb = generalDataManager.provideADB(this)
 
         //Set OFF before release
-        if (adb == GeneralDataManager.ON){
+        if (adb == GeneralDataManager.OFF){
             //ask permission
-            candyJockerViewModel.postStatusOnOff(GeneralDataManager.ON)
+            candyJockerViewModel.postStatusOnOff(GeneralDataManager.OFF)
             val permission = android.Manifest.permission.POST_NOTIFICATIONS
             requestPermission.launch(permission)
         } else {
             //adb is ON
             //post data to vm
+
             candyJockerViewModel.postStatusOnOff(GeneralDataManager.OFF)
             Log.d("123123", "Else block in requestPermission CandyJockerActivity")
         }

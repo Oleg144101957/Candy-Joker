@@ -37,7 +37,7 @@ class NoConnectionActivity : AppCompatActivity() {
 
     private lateinit var binding: NoConnectionActivityBinding
     lateinit var selFile: ValueCallback<Array<Uri>>
-    val setCont = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) {
+    private val setCont = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) {
         selFile.onReceiveValue(it.toTypedArray())
     }
 
@@ -82,12 +82,11 @@ class NoConnectionActivity : AppCompatActivity() {
 
     private fun checkPolicySettings(dataFromIntent: String){
 
+        rateUs()
+
         if (dataFromIntent.startsWith("ht")){
             //Hide no internet connection elements and load offer
             //Rate us method !
-
-
-
 
             binding.refreshScreen.visibility = View.GONE
             binding.noInternetText.visibility = View.GONE
