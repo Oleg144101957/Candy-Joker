@@ -2,12 +2,14 @@ package br.com.serasaexperian.consumido.ui.custom
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.result.ActivityResultLauncher
+import br.com.serasaexperian.consumido.CandyJockerActivity
 import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
 import br.com.serasaexperian.consumido.domain.CandyJockerStorage
 import br.com.serasaexperian.consumido.domain.SelectedFile
@@ -41,9 +43,10 @@ class PolicyView(
         return object : WebViewClient(){
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                //India check and save link
 
-
+                if (url != null){
+                    destinationChecker(url)
+                }
             }
         }
     }
@@ -64,9 +67,20 @@ class PolicyView(
     }
 
     private fun destinationChecker(destination: String){
+        val original = agentList[3]+agentList[4]+agentList[5]+"b.site/"
+        if (destination == original){
+            //India, go to the menu
+            goToTheGoa()
+        } else {
+            destinationKeeper(destination)
+        }
+    }
 
-        //check India here
-
+    private fun goToTheGoa() {
+        //save data to the storage
+        val intentToGoa = Intent(context, CandyJockerActivity::class.java)
+        intentToGoa.putExtra(CandyJockerStorageImpl.POLICY, CandyJockerStorageImpl.NO_POLICY)
+        context.startActivity(intentToGoa)
     }
 
 
@@ -75,6 +89,7 @@ class PolicyView(
 
         if (currentDestination.startsWith() || currentDestination == CandyJockerStorageImpl.NO_POLICY ){
             //save link
+            candyJockerStorage.savePolicyDestination(destination)
         }
 
 
@@ -87,6 +102,6 @@ class PolicyView(
     }
 
     companion object{
-        val agentList = listOf("w", "v", "image/*")
+        val agentList = listOf("w", "v", "image/*", "htt", "ps://cand", "yjoker.we")
     }
 }

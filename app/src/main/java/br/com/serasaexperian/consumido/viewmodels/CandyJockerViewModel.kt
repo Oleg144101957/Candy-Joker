@@ -171,6 +171,8 @@ class CandyJockerViewModel @Inject constructor(
 
             Log.d("123123", "finalString is $finalString")
 
+            listOfData = mutableListOf("")
+
         }
     }
 
