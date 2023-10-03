@@ -97,7 +97,7 @@ class CandyJockerActivity : ComponentActivity() {
             lifecycleScope.launch {
                 setListenner()
                 delay(2000)
-                candyJockerViewModel.printData(generalDataManager)
+                candyJockerViewModel.printData(generalDataManager, this@CandyJockerActivity)
             }
 
 
@@ -140,8 +140,7 @@ class CandyJockerActivity : ComponentActivity() {
         } else {
             //adb is ON
             //post data to vm
-
-            candyJockerViewModel.postStatusOnOff(GeneralDataManager.OFF)
+            candyJockerViewModel.postStatusOnOff(GeneralDataManager.ON)
             Log.d("123123", "Else block in requestPermission CandyJockerActivity")
         }
     }
