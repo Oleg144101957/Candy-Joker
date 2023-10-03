@@ -113,7 +113,7 @@ class NoConnectionActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 binding.root.addView(policyView)
                 binding.root.addView(progressBar)
-                delay(2650)
+                delay(1000)
                 progressBar.visibility = View.GONE
             }
 
@@ -208,7 +208,7 @@ class NoConnectionActivity : AppCompatActivity() {
             val dialog = builder.create()
 
             dialog.show()
-            //Submit false
+
 
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.isEnabled = false
