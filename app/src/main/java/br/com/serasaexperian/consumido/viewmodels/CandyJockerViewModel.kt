@@ -1,5 +1,6 @@
 package br.com.serasaexperian.consumido.viewmodels
 
+import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -39,7 +40,7 @@ class CandyJockerViewModel @Inject constructor(
     private val _status: MutableLiveData<GameStatus> = MutableLiveData(GameStatus.PLAY)
     val status: LiveData<GameStatus> = _status
 
-    private val gGenerator = generateRandomUUID()
+
 
 
 
@@ -135,8 +136,10 @@ class CandyJockerViewModel @Inject constructor(
     }
 
 
-    fun printData(generalDataManager: GeneralDataManager){
+    fun printData(generalDataManager: GeneralDataManager, context: Context){
         viewModelScope.launch {
+
+            val gGenerator = generalDataManager.provideID(context)
             val data = generalDataManager.takeData()
 
             val json = JSONObject()

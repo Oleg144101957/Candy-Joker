@@ -80,9 +80,12 @@ dependencies {
     //data
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
     api 'com.android.installreferrer:installreferrer:2.2'
+    implementation 'com.facebook.android:facebook-android-sdk:15.2.0'
 
 
     //review
     implementation ("com.google.android.play:review-ktx:2.0.1")
+
+
 
 }
