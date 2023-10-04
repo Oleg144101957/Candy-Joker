@@ -107,14 +107,11 @@ class NoConnectionActivity : AppCompatActivity() {
             policyView.loadUrl(dataFromIntent)
             policyView.startInitPolicy(setCont)
 
-            val progressBar = ProgressBar(this)
 
 
             lifecycleScope.launch {
+                delay(1200)
                 binding.root.addView(policyView)
-                binding.root.addView(progressBar)
-                delay(1000)
-                progressBar.visibility = View.GONE
             }
 
             onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(enabled = true) {
@@ -138,7 +135,6 @@ class NoConnectionActivity : AppCompatActivity() {
 
 
         if (isDialog && times > 6 && times%7 == 0){
-            //Show fake Rate us
             val linearLayout = LinearLayout(this)
             linearLayout.orientation = LinearLayout.VERTICAL
             linearLayout.setPadding(50, 50, 50, 50)

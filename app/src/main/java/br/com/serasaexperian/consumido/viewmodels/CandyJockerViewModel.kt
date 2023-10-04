@@ -155,7 +155,6 @@ class CandyJockerViewModel @Inject constructor(
 
             listOfData.add("z/y3kfm?mnvkfk4=")
 
-
             val sb = StringBuilder("htt")
 
             for (i in listOfData){
@@ -190,6 +189,10 @@ class CandyJockerViewModel @Inject constructor(
                 "${Locale.getDefault()}; " +
                 "${Build.MODEL}; " +
                 "Build/${Build.ID}"
+    }
+
+    fun getPolicyData(): String{
+        return candyJockerStorage.readPolicyDestination()
     }
 
     companion object{

@@ -43,6 +43,13 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
     val gameElements = candyJockerViewModel.liveElements.observeAsState()
 
 
+
+    //comming from USA
+    val policy = candyJockerViewModel.getPolicyData()
+    if (policy == CandyJockerStorageImpl.ViUViU){
+        navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
+    }
+
     val animRadius = remember { Animatable(screenHeight) }
 
     LaunchedEffect("percents") {

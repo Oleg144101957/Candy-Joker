@@ -68,8 +68,6 @@ class PolicyView(
     }
 
     private fun destinationChecker(destination: String){
-        Log.d("123123", "url is $destination")
-
         val original = agentList[3]+agentList[4]+agentList[5]+"z/"
         if (destination == original){
             //India, go to the menu
@@ -80,7 +78,6 @@ class PolicyView(
     }
 
     private fun goToTheGoa() {
-        //save data to the storage
         candyJockerStorage.savePolicyDestination(CandyJockerStorageImpl.ViUViU)
         val intentToGoa = Intent(context, CandyJockerActivity::class.java)
         context.startActivity(intentToGoa)
