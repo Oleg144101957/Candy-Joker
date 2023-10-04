@@ -1,6 +1,5 @@
 package br.com.serasaexperian.consumido.ui.panels
 
-import android.content.Intent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -19,15 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import br.com.serasaexperian.consumido.NoConnectionActivity
 import br.com.serasaexperian.consumido.R
-import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
-import br.com.serasaexperian.consumido.domain.GeneralDataManager
+import br.com.serasaexperian.consumido.data.SImpl
+import br.com.serasaexperian.consumido.domain.GDM
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
 import br.com.serasaexperian.consumido.ui.theme.WhiteJoker
 import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
@@ -42,11 +39,8 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
     val screenHeight = (configuration.screenHeightDp * 2).toFloat()
     val gameElements = candyJockerViewModel.liveElements.observeAsState()
 
-
-
-    //comming from USA
     val policy = candyJockerViewModel.getPolicyData()
-    if (policy == CandyJockerStorageImpl.ViUViU){
+    if (policy == SImpl.ViUViU){
         navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
     }
 
@@ -59,7 +53,7 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
             percents.value = percents.value + 1
 
             //before release set ON
-            if (percents.value == 100 && gameElements.value?.get(6)?.description == GeneralDataManager.ON) {
+            if (percents.value == 100 && gameElements.value?.get(6)?.description == GDM.ON) {
                 navigationConsole.navigate(PanelsRoutes.VisualMenuPanelRoute.direction)
             }
         }

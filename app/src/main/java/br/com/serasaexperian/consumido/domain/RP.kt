@@ -1,5 +1,5 @@
 package br.com.serasaexperian.consumido.domain
 
-interface RProvider {
+interface RP {
     suspend fun provideData(): String?
 }

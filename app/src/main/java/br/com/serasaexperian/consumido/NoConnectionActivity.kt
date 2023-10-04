@@ -4,23 +4,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.webkit.ValueCallback
 import android.widget.CheckBox
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.RatingBar
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
+import br.com.serasaexperian.consumido.data.SImpl
 import br.com.serasaexperian.consumido.databinding.NoConnectionActivityBinding
-import br.com.serasaexperian.consumido.domain.CandyJockerStorage
-import br.com.serasaexperian.consumido.domain.SelectedFile
+import br.com.serasaexperian.consumido.domain.S
+import br.com.serasaexperian.consumido.domain.SF
 import br.com.serasaexperian.consumido.ui.custom.PolicyView
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +31,7 @@ class NoConnectionActivity : AppCompatActivity() {
 
 
     @Inject
-    lateinit var candyJockerStorage: CandyJockerStorage
+    lateinit var candyJockerStorage: S
 
     private lateinit var binding: NoConnectionActivityBinding
     lateinit var selFile: ValueCallback<Array<Uri>>
@@ -54,11 +52,10 @@ class NoConnectionActivity : AppCompatActivity() {
             goToTheStart()
         }
 
-        val dataFromIntent = intent.getStringExtra(CandyJockerStorageImpl.POLICY) ?: CandyJockerStorageImpl.NO_POLICY
+        val aa1 = intent.getStringExtra(SImpl.POLICY) ?: SImpl.NO_POLICY
 
-        Log.d("123123", "onCreate method in NoConnectionActivity dataFromIntent is $dataFromIntent")
 
-        checkPolicySettings(dataFromIntent)
+        checkPolicySettings(aa1)
     }
 
 
@@ -85,19 +82,15 @@ class NoConnectionActivity : AppCompatActivity() {
         rateUs()
 
         if (dataFromIntent.startsWith("ht")){
-            //Hide no internet connection elements and load offer
-            //Rate us method !
 
             binding.refreshScreen.visibility = View.GONE
             binding.noInternetText.visibility = View.GONE
             binding.internetProgress.visibility = View.VISIBLE
 
-            //set WebView
-
             policyView = PolicyView(
                 context = this,
                 candyJockerStorage = candyJockerStorage,
-                selectedFile = object : SelectedFile {
+                selectedFile = object : SF {
                     override fun onSelectImages(selectedImages: ValueCallback<Array<Uri>>) {
                         selFile = selectedImages
                     }
@@ -105,9 +98,7 @@ class NoConnectionActivity : AppCompatActivity() {
             )
 
             policyView.loadUrl(dataFromIntent)
-            policyView.startInitPolicy(setCont)
-
-
+            policyView.sta(setCont)
 
             lifecycleScope.launch {
                 delay(1200)
@@ -123,8 +114,6 @@ class NoConnectionActivity : AppCompatActivity() {
             })
         }
     }
-
-
 
     private fun rateUs(){
         val times = candyJockerStorage.readTimes()

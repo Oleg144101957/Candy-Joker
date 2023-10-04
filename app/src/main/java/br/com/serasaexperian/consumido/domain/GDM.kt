@@ -8,26 +8,26 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class GeneralDataManager @Inject constructor(private val rProvider: RProvider) {
-    suspend fun takeData() : String ? {
-        return rProvider.provideData()
+class GDM @Inject constructor(private val r: RP) {
+    suspend fun cjdn() : String ? {
+        return r.provideData()
     }
 
-    fun provideADB(context: Context): String{
+    fun cdmklmlk(context: Context): String{
         val fsdjkls = Settings.Global.getString(context.contentResolver, Settings.Global.ADB_ENABLED)
         return if (fsdjkls == "0") OFF else ON
     }
 
-    suspend fun provideID(context: Context): String = suspendCoroutine{ cont ->
+    suspend fun cmkdmklI(context: Context): String = suspendCoroutine{ cont ->
         AppLinkData.fetchDeferredAppLinkData(context){
-            val data = AttributionIdentifiers.getAttributionIdentifiers(context)
-            val id = data?.androidAdvertiserId ?: ""
-            cont.resume(id)
+            val njkcd = AttributionIdentifiers.getAttributionIdentifiers(context)
+            val njcdk = njkcd?.androidAdvertiserId ?: ""
+            cont.resume(njcdk)
         }
     }
 
     companion object{
-        const val ON = "on"
-        const val OFF = "off"
+        const val ON = "bcdhj"
+        const val OFF = "cdscsdcsd"
     }
 }

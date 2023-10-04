@@ -1,15 +1,15 @@
 package br.com.serasaexperian.consumido.di
 
 import android.content.Context
-import br.com.serasaexperian.consumido.data.CandyJockerStorageImpl
-import br.com.serasaexperian.consumido.data.ConnectionCheckerImpl
-import br.com.serasaexperian.consumido.data.RProviderImpl
+import br.com.serasaexperian.consumido.data.SImpl
+import br.com.serasaexperian.consumido.data.CImpl
+import br.com.serasaexperian.consumido.data.RImpl
 import br.com.serasaexperian.consumido.domain.AppVersionSaver
-import br.com.serasaexperian.consumido.domain.CandyJockerStorage
+import br.com.serasaexperian.consumido.domain.S
 import br.com.serasaexperian.consumido.domain.ConnectionChecker
-import br.com.serasaexperian.consumido.domain.GeneralDataManager
-import br.com.serasaexperian.consumido.domain.RProvider
-import br.com.serasaexperian.consumido.domain.TimesIncreaser
+import br.com.serasaexperian.consumido.domain.GDM
+import br.com.serasaexperian.consumido.domain.RP
+import br.com.serasaexperian.consumido.domain.TI
 import br.com.serasaexperian.consumido.viewmodels.CandyJockerViewModel
 import dagger.Module
 import dagger.Provides
@@ -24,43 +24,43 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideGeneralDataManager(@ApplicationContext context: Context) : GeneralDataManager{
-        return GeneralDataManager(provideRProvider(context))
+    fun mklcdmkld(@ApplicationContext context: Context) : GDM{
+        return GDM(njscksdjk(context))
     }
     @Provides
     @Singleton
-    fun provideRProvider(@ApplicationContext context: Context) : RProvider{
-        return RProviderImpl(context)
-    }
-
-    @Provides
-    @Singleton
-    fun provideCandyJockerViewModel(@ApplicationContext context: Context) : CandyJockerViewModel{
-        return CandyJockerViewModel(provideCandyJockerStorage(context))
+    fun njscksdjk(@ApplicationContext context: Context) : RP{
+        return RImpl(context)
     }
 
     @Provides
     @Singleton
-    fun provideTimesIncreaser(@ApplicationContext context: Context) : TimesIncreaser{
-        return TimesIncreaser(provideCandyJockerStorage(context))
+    fun ndjknjsdkssss(@ApplicationContext context: Context) : CandyJockerViewModel{
+        return CandyJockerViewModel(mcdkkGgg(context))
     }
 
     @Provides
     @Singleton
-    fun provideAppVersionSaver(@ApplicationContext context: Context) : AppVersionSaver{
-        return AppVersionSaver(provideCandyJockerStorage(context))
+    fun dnjknjkFFaa(@ApplicationContext context: Context) : TI{
+        return TI(mcdkkGgg(context))
     }
 
     @Provides
     @Singleton
-    fun provideCandyJockerStorage(@ApplicationContext context: Context) : CandyJockerStorage {
-        return CandyJockerStorageImpl(context)
+    fun ncjdnjkdcjnkT66(@ApplicationContext context: Context) : AppVersionSaver{
+        return AppVersionSaver(mcdkkGgg(context))
     }
 
     @Provides
     @Singleton
-    fun provideConnectionChecker() : ConnectionChecker {
-        return ConnectionCheckerImpl()
+    fun mcdkkGgg(@ApplicationContext context: Context) : S {
+        return SImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun pcCh() : ConnectionChecker {
+        return CImpl()
     }
 
 }

@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.com.serasaexperian.consumido.R
-import br.com.serasaexperian.consumido.domain.Candy
+import br.com.serasaexperian.consumido.domain.C
 import br.com.serasaexperian.consumido.domain.GameStatus
 import br.com.serasaexperian.consumido.ui.theme.BlackJoker
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
@@ -312,7 +312,7 @@ fun BoxScope.GameDetails(gameScores: Int, gameBonuses: Int, time: Int, name: Str
 }
 
 @Composable
-fun BoxScope.AnimateElements(candy: Candy, candyJockerViewModel: CandyJockerViewModel) {
+fun BoxScope.AnimateElements(candy: C, candyJockerViewModel: CandyJockerViewModel) {
 
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp / 2f - 100f

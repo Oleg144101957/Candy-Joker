@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import br.com.serasaexperian.consumido.domain.AppVersionSaver
-import br.com.serasaexperian.consumido.domain.TimesIncreaser
+import br.com.serasaexperian.consumido.domain.TI
 import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class JockerApp : Application() {
 
     @Inject
-    lateinit var timesIncreaser: TimesIncreaser
+    lateinit var timesIncreaser: TI
 
     @Inject
     lateinit var appVerSaver: AppVersionSaver
@@ -43,12 +43,11 @@ class JockerApp : Application() {
 
     private fun saveAppVersion() {
         val ver = getAppVerData().toString()
-        Log.d("123123", "App ver is $ver")
         appVerSaver.saveAppVersion(ver)
     }
 
     private fun increaseTimes() {
-        timesIncreaser.increaseTimes()
+        timesIncreaser.iT()
     }
 
     private fun getAppVerData() = try{

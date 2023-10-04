@@ -1,6 +1,6 @@
 package br.com.serasaexperian.consumido.domain
 
-interface CandyJockerStorage {
+interface S {
 
 
     //Launch times

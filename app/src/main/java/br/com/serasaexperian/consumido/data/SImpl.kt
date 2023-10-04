@@ -1,9 +1,9 @@
 package br.com.serasaexperian.consumido.data
 
 import android.content.Context
-import br.com.serasaexperian.consumido.domain.CandyJockerStorage
+import br.com.serasaexperian.consumido.domain.S
 
-class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
+class SImpl(context: Context) : S{
 
     private val sharedPreferences = context.getSharedPreferences(JOCKER_STORAGE, Context.MODE_PRIVATE)
     override fun readTimes(): Int {
@@ -35,11 +35,11 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
     }
 
     override fun saveAppVersion(appVersion: String) {
-        sharedPreferences.edit().putString(APP_VERSION_KEY, appVersion).apply()
+        sharedPreferences.edit().putString(JNNJK, appVersion).apply()
     }
 
     override fun readAppVersion(): String {
-        return sharedPreferences.getString(APP_VERSION_KEY, NO_APP_VERSION) ?: NO_APP_VERSION
+        return sharedPreferences.getString(JNNJK, NO_APP_VERSION) ?: NO_APP_VERSION
     }
 
 
@@ -58,7 +58,7 @@ class CandyJockerStorageImpl(context: Context) : CandyJockerStorage{
         const val DEFAULT_NAME = " gamer"
         const val POLICY = " policy"
         const val NO_POLICY = "empty_policy"
-        const val APP_VERSION_KEY = "app_version"
+        const val JNNJK = "app_version"
         const val NO_APP_VERSION = "no_app_version"
         const val ViUViU = "no_friends"
         const val RATEUS = "RATEUS"

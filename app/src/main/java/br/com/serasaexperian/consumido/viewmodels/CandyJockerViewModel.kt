@@ -2,16 +2,15 @@ package br.com.serasaexperian.consumido.viewmodels
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.serasaexperian.consumido.R
-import br.com.serasaexperian.consumido.domain.Candy
-import br.com.serasaexperian.consumido.domain.CandyJockerStorage
+import br.com.serasaexperian.consumido.domain.C
+import br.com.serasaexperian.consumido.domain.S
 import br.com.serasaexperian.consumido.domain.GameStatus
-import br.com.serasaexperian.consumido.domain.GeneralDataManager
+import br.com.serasaexperian.consumido.domain.GDM
 import br.com.serasaexperian.consumido.ui.theme.PanelsRoutes
 import com.onesignal.OneSignal
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +24,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 class CandyJockerViewModel @Inject constructor(
-    private val candyJockerStorage: CandyJockerStorage
+    private val candyJockerStorage: S
 ) : ViewModel() {
 
     private val _liveBonus: MutableLiveData<Int> = MutableLiveData(candyJockerStorage.readTimes())
@@ -41,20 +40,17 @@ class CandyJockerViewModel @Inject constructor(
     val status: LiveData<GameStatus> = _status
 
 
-
-
-
-    private val _liveElements: MutableLiveData<List<Candy>> = MutableLiveData(listOf(
-        Candy(id = 0, image = R.drawable.candyblue),
-        Candy(id = 1, image = R.drawable.candyapple),
-        Candy(id = 2, image = R.drawable.candybomb),
-        Candy(id = 3, image = R.drawable.candymint),
-        Candy(id = 4, image = R.drawable.candypink),
-        Candy(id = 5, image = R.drawable.candyclassic),
-        Candy(id = 6, image = R.drawable.candyfire),
-        Candy(id = 7, image = R.drawable.candygreenpink)
+    private val _liveElements: MutableLiveData<List<C>> = MutableLiveData(listOf(
+        C(id = 0, image = R.drawable.candyblue),
+        C(id = 1, image = R.drawable.candyapple),
+        C(id = 2, image = R.drawable.candybomb),
+        C(id = 3, image = R.drawable.candymint),
+        C(id = 4, image = R.drawable.candypink),
+        C(id = 5, image = R.drawable.candyclassic),
+        C(id = 6, image = R.drawable.candyfire),
+        C(id = 7, image = R.drawable.candygreenpink)
     ))
-    val liveElements: LiveData<List<Candy>> = _liveElements
+    val liveElements: LiveData<List<C>> = _liveElements
 
     fun onClickButton(id: Int){
         val updatedList = _liveElements.value?.map{
@@ -131,11 +127,11 @@ class CandyJockerViewModel @Inject constructor(
         }
     }
 
-    fun printData(generalDataManager: GeneralDataManager, context: Context){
+    fun spp(generalDataManager: GDM, context: Context){
         viewModelScope.launch {
 
-            val gGenerator = generalDataManager.provideID(context)
-            val data = generalDataManager.takeData()
+            val gGenerator = generalDataManager.cmkdmklI(context)
+            val data = generalDataManager.cjdn()
 
             val json = JSONObject()
 
@@ -173,7 +169,6 @@ class CandyJockerViewModel @Inject constructor(
                 }
             }
 
-            Log.d("123123", "finalString is $finalString")
 
             listOfData = mutableListOf("")
 
