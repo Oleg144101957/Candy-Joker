@@ -84,7 +84,4 @@ dependencies {
 
     //review
     implementation ("com.google.android.play:review-ktx:2.0.1")
-
-
-
 }

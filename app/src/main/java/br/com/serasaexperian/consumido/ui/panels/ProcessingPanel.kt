@@ -112,5 +112,4 @@ fun ProcessingPanel(navigationConsole: NavHostController, candyJockerViewModel: 
             )
         })
     }
-
 }

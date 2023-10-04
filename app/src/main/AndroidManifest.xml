@@ -37,6 +37,14 @@
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id_id" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/token" />
+
     </application>
 
 </manifest>

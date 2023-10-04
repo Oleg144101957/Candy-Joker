@@ -15,7 +15,6 @@ class RProviderImpl(private val context: Context) : RProvider {
 
         rClient.startConnection(object : InstallReferrerStateListener{
             override fun onInstallReferrerSetupFinished(response: Int) {
-
                 if (response == InstallReferrerClient.InstallReferrerResponse.OK){
                     cont.resume(
                         try {

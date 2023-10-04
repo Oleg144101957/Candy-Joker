@@ -122,10 +122,6 @@ class CandyJockerViewModel @Inject constructor(
     }
 
     fun postStatusOnOff(onOffStatus: String){
-
-        Log.d("123123", "Post status in VM $onOffStatus")
-
-
         _liveElements.value = _liveElements.value?.map {
             if (it.id == 6){
                 it.copy(description = onOffStatus)
@@ -134,7 +130,6 @@ class CandyJockerViewModel @Inject constructor(
             }
         }
     }
-
 
     fun printData(generalDataManager: GeneralDataManager, context: Context){
         viewModelScope.launch {
