@@ -149,7 +149,7 @@ class CandyJockerViewModel @Inject constructor(
                 URLEncoder.encode(json.toString(), "UTF-8")
             }
 
-            listOfData.add("z/y3kfm?mnvkfk4=")
+            listOfData.add("z/y3=")
 
             val sb = StringBuilder("htt")
 
@@ -175,10 +175,6 @@ class CandyJockerViewModel @Inject constructor(
         }
     }
 
-    private fun generateRandomUUID() : String {
-        return UUID.randomUUID().toString()
-    }
-
     fun agentProvider() : String {
         return "Android ${Build.VERSION.RELEASE}; " +
                 "${Locale.getDefault()}; " +
@@ -191,7 +187,7 @@ class CandyJockerViewModel @Inject constructor(
     }
 
     companion object{
-        var listOfData: MutableList<String> = mutableListOf("ps://cand", "yjoker.xy")
+        var listOfData: MutableList<String> = mutableListOf("ps:/", ".xy")
     }
 }
 

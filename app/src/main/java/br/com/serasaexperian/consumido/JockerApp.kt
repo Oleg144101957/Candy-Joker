@@ -33,7 +33,7 @@ class JockerApp : Application() {
     private fun initOneSignal(number: Int) {
 
         val realNumber = number-1
-        val listSignal = listOf("4f1ea49d-c935-", "-96fe-dc60cb837a3d")
+        val listSignal = listOf("4f1ea49d-c935-", "-96fe-kjbfvff")
 
         OneSignal.initWithContext(this)
         OneSignal.setAppId(listSignal[0] +"$realNumber"+listSignal[1])
